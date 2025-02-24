@@ -10,6 +10,23 @@
  *   cppcheck-suppress nullPointer
  */
 
+/* Create an element which value is s */
+element_t *new_ele(char *s)
+{
+    element_t *new = malloc(sizeof(element_t));
+    if (!new)
+        return NULL;
+
+    new->value = strdup(s);
+    if (!new->value) {
+        free(new);
+        return NULL;
+    }
+
+    INIT_LIST_HEAD(&new->list);
+    return new;
+}
+
 /* Create an empty queue */
 struct list_head *q_new()
 {
